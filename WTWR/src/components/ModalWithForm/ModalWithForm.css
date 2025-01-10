@@ -26,6 +26,13 @@
   position: absolute;
   top: 20px;
   right: 28px;
+  border: none;
+  background-color: transparent;
+}
+
+.modal__close-icon {
+  height: 20px;
+  width: 20px;
 }
 
 .modal__content {
@@ -46,6 +53,14 @@
 
 .modal__input {
   display: block;
+  border-bottom: 1px solid #00000080;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  width: 100%;
+  max-width: 440px;
+  height: 24px;
+  padding-top: 8px;
 }
 
 .modal__radio-buttons {
@@ -61,11 +76,11 @@
 
 .modal__label_type_radio {
   margin: 0;
-  padding: 0;
+  padding: 0 0 8px;
 }
 
 .modal__legend {
-  padding: 24px 0 0;
+  padding: 24px 0 12px;
 }
 
 .modal__submit {

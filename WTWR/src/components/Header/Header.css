@@ -10,10 +10,20 @@
 
 .header__date-and-location {
   margin: 0;
+  width: 160px;
+  height: 24px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
+  display: contents;
 }
 
 .header__add-clothes-btn {
   margin: 0 20px 0 auto;
+  border: none;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
 }
 
 .header__user-container {
@@ -24,4 +34,7 @@
 
 .header__username {
   margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.2;
 }

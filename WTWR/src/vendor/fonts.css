@@ -27,16 +27,18 @@
 }*/
 
 @font-face {
-  font-family: "Cabinet Grotesk Medium";
+  font-family: "Cabinet Grotesk";
   font-style: normal;
   font-weight: 500;
+  font-display: swap;
   src: url("./fonts/CabinetGrotesk-Medium.woff") format("woff");
 }
 
 @font-face {
-  font-family: "Cabinet Grotesk Bold";
+  font-family: "Cabinet Grotesk";
   font-style: normal;
   font-weight: 700;
+  font-display: swap;
   src: url("./fonts/CabinetGrotesk-Bold.woff") format("woff");
 }
 

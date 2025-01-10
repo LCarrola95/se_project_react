@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 
 import "./App.css";
+import "../../vendor/fonts.css";
 import { coordinates, APIkey } from "../../utils/constants";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import ItemModal from "../ItemModal/ItemModal";
+import Footer from "../Footer/Footer";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 
 function App() {
@@ -70,7 +72,7 @@ function App() {
           />
         </label>
         <fieldset className="modal__radio-buttons">
-          <legend className="modal__legend">Select the weather type</legend>
+          <legend className="modal__legend">Select the weather type:</legend>
           <label htmlFor="hot" className="modal__label modal__label_type_radio">
             <input id="hot" type="radio" className="modal__radio-input" /> Hot
           </label>
@@ -93,6 +95,7 @@ function App() {
         card={selectedCard}
         onClose={closeActiveModal}
       />
+      <Footer />
     </div>
   );
 }
