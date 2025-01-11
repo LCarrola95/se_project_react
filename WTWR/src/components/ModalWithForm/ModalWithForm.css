@@ -51,6 +51,9 @@
   flex-direction: column;
 }
 
+.modal__image {
+}
+
 .modal__input {
   display: block;
   border-bottom: 1px solid #00000080;
