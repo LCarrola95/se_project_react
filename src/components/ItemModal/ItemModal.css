@@ -74,8 +74,26 @@
   width: 100%;
   background: #fff;
   color: #000;
+  margin-bottom: -20px;
 }
 
 .modal__weather {
   margin: 0 0 32px 32px;
+}
+
+.modal__delete-button {
+  background: none;
+  border: none;
+  color: #FF4D4D;
+  font-size: 20px;
+  line-height: 1.2;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+    left: 380px;
+    bottom: 90px
+}
+
+.modal__delete-button:hover {
+  opacity: 0.6;
 }
