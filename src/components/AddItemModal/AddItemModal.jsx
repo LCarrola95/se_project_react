@@ -18,11 +18,9 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
       name: values.name || "",
       imageUrl: values.imageUrl || "",
       weather: values.weatherType || "",
-    }).then(() => {
-      resetForm();
     });
+    resetForm();
   };
-
   return (
     <ModalWithForm
       title="New garment"
