@@ -1,6 +1,6 @@
 import "./ModalWithForm.css";
 import closeButton from "../../assets/close-button.svg";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ModalWithForm({
   children,
@@ -9,9 +9,22 @@ function ModalWithForm({
   isOpen,
   onClose,
   onSubmit,
+  isLoading,
 }) {
   const [isValid, setIsValid] = useState(false);
   const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    if (!isOpen) {
+      setIsValid(false);
+      setErrors({});
+
+      const form = document.querySelector(".modal__form");
+      if (form) {
+        form.reset();
+      }
+    }
+  }, [isOpen]);
 
   const handleFormChange = (e) => {
     const form = e.target.form;
@@ -39,7 +52,12 @@ function ModalWithForm({
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content_type_input">
         <h2 className="modal__title">{title}</h2>
-        <button onClick={onClose} type="button" className="modal__close">
+        <button
+          onClick={onClose}
+          type="button"
+          className="modal__close"
+          disabled={isLoading}
+        >
           <img
             src={closeButton}
             alt="close button"
@@ -55,8 +73,9 @@ function ModalWithForm({
           <button
             type="submit"
             className={`modal__submit ${isValid ? "modal__submit_valid" : ""}`}
+            disabled={!isValid || isLoading}
           >
-            {buttonText}
+            {isLoading ? "Saving..." : buttonText}
           </button>
         </form>
       </div>

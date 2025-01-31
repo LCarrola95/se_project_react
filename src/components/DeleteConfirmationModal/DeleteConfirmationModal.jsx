@@ -1,11 +1,16 @@
 import "./DeleteConfirmationModal.css";
 import closeButton from "../../assets/close-button.svg";
 
-const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
+const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm, isLoading }) => {
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content modal__content_confirm">
-        <button type="button" onClick={onClose} className="modal__close">
+        <button
+          type="button"
+          onClick={onClose}
+          className="modal__close"
+          disabled={isLoading}
+        >
           <img
             src={closeButton}
             alt="close button"
@@ -23,13 +28,15 @@ const DeleteConfirmationModal = ({ isOpen, onClose, onConfirm }) => {
               type="button"
               onClick={onConfirm}
               className="modal__confirm-button modal__confirm-button_type_delete"
+              disabled={isLoading}
             >
-              Yes, delete item
+              {isLoading ? "Deleting..." : "Yes, delete item"}
             </button>
             <button
               type="button"
               onClick={onClose}
               className="modal__confirm-button modal__confirm-button_type_cancel"
+              disabled={isLoading}
             >
               Cancel
             </button>

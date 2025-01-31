@@ -24,6 +24,7 @@ function App() {
     condition: "",
     isDay: false,
   });
+  const [isLoading, setIsLoading] = useState(false);
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
@@ -47,13 +48,15 @@ function App() {
   };
 
   const handleAddItemModalSubmit = ({ name, imageUrl, weather }) => {
+    setIsLoading(true);
     addItem({ name, imageUrl, weather })
       .then((item) => {
         setClothingItems((prevItems) => [item, ...prevItems]);
         closeActiveModal();
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -63,16 +66,18 @@ function App() {
   };
 
   const handleConfirmDelete = () => {
+    setIsLoading(true);
     deleteItem(selectedCard._id)
       .then(() => {
         setClothingItems((prevItems) =>
           prevItems.filter((item) => item._id !== selectedCard._id)
         );
-        setActiveModal("");
+        closeActiveModal();
         setSelectedCard({});
       })
-      .catch((error) => {
-        console.error(error);
+      .catch(console.error)
+      .finally(() => {
+        setIsLoading(false);
       });
   };
 
@@ -94,6 +99,22 @@ function App() {
         console.error("Error fetching items:", error);
       });
   }, []);
+
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
 
   return (
     <BrowserRouter basename="/se_project_react">
@@ -131,6 +152,7 @@ function App() {
             isOpen={activeModal === "add-garment"}
             onClose={closeActiveModal}
             onAddItemModalSubmit={handleAddItemModalSubmit}
+            isLoading={isLoading}
           />
           <ItemModal
             activeModal={activeModal}
@@ -142,6 +164,7 @@ function App() {
             isOpen={activeModal === "confirm-delete"}
             onClose={closeActiveModal}
             onConfirm={handleConfirmDelete}
+            isLoading={isLoading}
           />
           <Footer />
         </div>
