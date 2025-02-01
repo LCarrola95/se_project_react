@@ -4,7 +4,8 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useFormAndValidation } from "../../../hooks/useFormAndValidation";
 
 function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
-  const { values, handleChange, errors, resetForm } = useFormAndValidation();
+  const { values, handleChange, errors, resetForm, isValid } =
+    useFormAndValidation();
 
   useEffect(() => {
     if (!isOpen) {
@@ -14,13 +15,19 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItemModalSubmit({
+    const result = onAddItemModalSubmit({
       name: values.name || "",
       imageUrl: values.imageUrl || "",
       weather: values.weatherType || "",
     });
-    resetForm();
+
+    if (result && typeof result.then === "function") {
+      result.then(() => {
+        resetForm();
+      });
+    }
   };
+
   return (
     <ModalWithForm
       title="New garment"
@@ -29,6 +36,7 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
       onClose={onClose}
       onSubmit={handleSubmit}
       isLoading={isLoading}
+      isValid={isValid}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
