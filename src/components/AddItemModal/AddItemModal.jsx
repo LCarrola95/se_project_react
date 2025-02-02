@@ -21,9 +21,9 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
       weather: values.weatherType || "",
     });
 
-    if (result && typeof result.then === "function") {
-      result.then(() => {
-        resetForm();
+    if (result && typeof result.catch === "function") {
+      result.catch((err) => {
+        console.error(err);
       });
     }
   };
