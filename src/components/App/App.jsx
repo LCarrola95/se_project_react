@@ -18,7 +18,7 @@ import DeleteConfirmationModal from "../DeleteConfirmationModal/DeleteConfirmati
 import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import { getItems, addItem, deleteItem, updateUser } from "../../utils/api";
-import { login, register } from "../../utils/auth";
+import { login, register, checkToken } from "../../utils/auth";
 import CurrentUserContext from "../../contexts/currentUserContext";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
@@ -104,8 +104,9 @@ function App() {
 
     try {
       const userData = await register(formData);
-      localStorage.setItem("token", userData.token);
+      localStorage.setItem("jwt", userData.token);
       setIsLoggedIn(true);
+      setCurrentUser(userData.user);
       setActiveModal("");
     } catch (error) {
       setErrorMessage("Registration failed. Please try again.");
@@ -121,8 +122,9 @@ function App() {
 
     try {
       const userData = await login(formData);
-      localStorage.setItem("token", userData.token);
+      localStorage.setItem("jwt", userData.token);
       setIsLoggedIn(true);
+      setCurrentUser(userData.user);
       setActiveModal("");
     } catch (error) {
       setErrorMessage("Login failed. Please check your credentials.");
@@ -190,7 +192,7 @@ function App() {
 
   const onLogout = () => {
     localStorage.removeItem("jwt");
-    setIsLoggedIn("false");
+    setIsLoggedIn(false);
     setCurrentUser(null);
   };
 
