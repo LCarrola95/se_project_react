@@ -116,12 +116,12 @@ function App() {
     }
   };
 
-  const handleLogin = async (formData) => {
+  const handleLogin = async ({ email, password }) => {
     setIsLoading(true);
     setErrorMessage("");
 
     try {
-      const userData = await login(formData);
+      const userData = await login({ email, password });
       localStorage.setItem("jwt", userData.token);
       setIsLoggedIn(true);
       setCurrentUser(userData.user);
