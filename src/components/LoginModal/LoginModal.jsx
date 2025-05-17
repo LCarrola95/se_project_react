@@ -5,12 +5,19 @@ function LoginModal({ isOpen, onClose, onLogin, isLoading }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  //const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     setEmail("");
     setPassword("");
+    setIsValid(false);
   }, [isOpen]);
+
+  useEffect(() => {
+    const emailIsValid = email.includes("@") && email.length > 5;
+    const passwordIsValid = password.length >= 6;
+    setIsValid(emailIsValid && passwordIsValid);
+  }, [email, password]);
 
   function handleEmailChange(e) {
     setEmail(e.target.value);

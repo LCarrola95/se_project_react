@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Route, Routes, BrowserRouter } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 
 import "./App.css";
 import "../../vendor/fonts.css";
@@ -23,6 +23,8 @@ import CurrentUserContext from "../../contexts/currentUserContext";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
 
 function App() {
+  const navigate = useNavigate();
+
   const [weatherData, setWeatherData] = useState({
     type: "",
     temp: { F: 999, C: 999 },
@@ -108,6 +110,7 @@ function App() {
       setIsLoggedIn(true);
       setCurrentUser(userData.user);
       setActiveModal("");
+      navigate("/profile");
     } catch (error) {
       setErrorMessage("Registration failed. Please try again.");
       console.error(error);
@@ -126,6 +129,7 @@ function App() {
       setIsLoggedIn(true);
       setCurrentUser(userData.user);
       setActiveModal("");
+      navigate("/profile");
     } catch (error) {
       setErrorMessage("Login failed. Please check your credentials.");
       console.error(error);
@@ -247,95 +251,91 @@ function App() {
   }, []);
 
   return (
-    <BrowserRouter basename="/se_project_react">
-      <CurrentTemperatureUnitContext.Provider
-        value={{ currentTemperatureUnit, handleToggleSwitchChange }}
-      >
-        <CurrentUserContext.Provider value={currentUser}>
-          <div className="page">
-            {errorMessage && (
-              <div className="error-message">{errorMessage}</div>
-            )}
-            <div className="page__content">
-              <Header
-                handleAddClick={handleAddClick}
-                weatherData={weatherData}
-                handleLoginClick={handleLoginClick}
-                onLogout={onLogout}
-                handleRegisterClick={handleRegisterClick}
+    <CurrentTemperatureUnitContext.Provider
+      value={{ currentTemperatureUnit, handleToggleSwitchChange }}
+    >
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="page">
+          {errorMessage && <div className="error-message">{errorMessage}</div>}
+          <div className="page__content">
+            <Header
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
+              handleLoginClick={handleLoginClick}
+              onLogout={onLogout}
+              handleRegisterClick={handleRegisterClick}
+            />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    weatherData={weatherData}
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
+                  />
+                }
               />
-              <Routes>
-                <Route
-                  path="/"
-                  element={
-                    <Main
-                      weatherData={weatherData}
-                      handleCardClick={handleCardClick}
-                      clothingItems={clothingItems}
-                      onCardLike={handleCardLike}
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      clothingItems={clothingItems.filter(
+                        (item) => item.owner === currentUser?._id
+                      )}
+                      handleAddClick={handleAddClick}
+                      handleDeleteCard={handleDeleteCard}
+                      onCardClick={handleCardClick}
+                      onEditProfile={handleEditProfileClick}
+                      onLogout={onLogout}
                     />
-                  }
-                />
-                <Route
-                  path="/profile"
-                  element={
-                    <ProtectedRoute isLoggedIn={isLoggedIn}>
-                      <Profile
-                        clothingItems={clothingItems.filter(
-                          (item) => item.owner === currentUser?._id
-                        )}
-                        handleAddClick={handleAddClick}
-                        handleDeleteCard={handleDeleteCard}
-                        onCardClick={handleCardClick}
-                        onEditProfile={handleEditProfileClick}
-                        onLogout={onLogout}
-                      />
-                    </ProtectedRoute>
-                  }
-                />
-              </Routes>
-              <Footer />
-            </div>
-            <AddItemModal
-              isOpen={activeModal === "add-garment"}
-              onClose={closeActiveModal}
-              onAddItemModalSubmit={handleAddItemModalSubmit}
-              isLoading={isLoading}
-            />
-            <RegisterModal
-              isOpen={activeModal === "register"}
-              onClose={closeActiveModal}
-              onRegister={handleRegister}
-              isLoading={isLoading}
-            />
-            <LoginModal
-              isOpen={activeModal === "login"}
-              onClose={closeActiveModal}
-              onLogin={handleLogin}
-              isLoading={isLoading}
-            />
-            <ItemModal
-              activeModal={activeModal}
-              card={selectedCard}
-              onClose={closeActiveModal}
-              onDelete={handleDeleteCard}
-            />
-            <DeleteConfirmationModal
-              isOpen={activeModal === "confirm-delete"}
-              onClose={closeActiveModal}
-              onConfirm={handleConfirmDelete}
-              isLoading={isLoading}
-            />
-            <EditProfileModal
-              isOpen={isEditProfileModalOpen}
-              onClose={closeEditProfileModal}
-              onUpdateUser={handleUpdateUser}
-              isLoading={isEditProfileLoading}
-            />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+            <Footer />
           </div>
-        </CurrentUserContext.Provider>
-      </CurrentTemperatureUnitContext.Provider>
-    </BrowserRouter>
+          <AddItemModal
+            isOpen={activeModal === "add-garment"}
+            onClose={closeActiveModal}
+            onAddItemModalSubmit={handleAddItemModalSubmit}
+            isLoading={isLoading}
+          />
+          <RegisterModal
+            isOpen={activeModal === "register"}
+            onClose={closeActiveModal}
+            onRegister={handleRegister}
+            isLoading={isLoading}
+          />
+          <LoginModal
+            isOpen={activeModal === "login"}
+            onClose={closeActiveModal}
+            onLogin={handleLogin}
+            isLoading={isLoading}
+          />
+          <ItemModal
+            activeModal={activeModal}
+            card={selectedCard}
+            onClose={closeActiveModal}
+            onDelete={handleDeleteCard}
+          />
+          <DeleteConfirmationModal
+            isOpen={activeModal === "confirm-delete"}
+            onClose={closeActiveModal}
+            onConfirm={handleConfirmDelete}
+            isLoading={isLoading}
+          />
+          <EditProfileModal
+            isOpen={isEditProfileModalOpen}
+            onClose={closeEditProfileModal}
+            onUpdateUser={handleUpdateUser}
+            isLoading={isEditProfileLoading}
+          />
+        </div>
+      </CurrentUserContext.Provider>
+    </CurrentTemperatureUnitContext.Provider>
   );
 }
 
