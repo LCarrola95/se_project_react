@@ -308,12 +308,14 @@ function App() {
             onClose={closeActiveModal}
             onRegister={handleRegister}
             isLoading={isLoading}
+            onSwitchToLogin={handleLoginClick}
           />
           <LoginModal
             isOpen={activeModal === "login"}
             onClose={closeActiveModal}
             onLogin={handleLogin}
             isLoading={isLoading}
+            onSwitchToRegister={handleRegisterClick}
           />
           <ItemModal
             activeModal={activeModal}

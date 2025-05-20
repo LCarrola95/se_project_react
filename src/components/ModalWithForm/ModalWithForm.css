@@ -47,6 +47,16 @@
   border-radius: 20px;
 }
 
+.modal__content_type_login {
+  max-width: 469px;
+  height: 304px;
+}
+
+.modal__content_type_register {
+  max-width: 469px;
+  height: 456px;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;
@@ -96,6 +106,32 @@
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  position: relative;
+}
+
+.modal__submit_type_login-register {
+  width: 86px;
+  height: 36px;
+  bottom: 90px;
+}
+
+.modal__switch {
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+  gap: 12px;
+}
+
+.modal__switch-button {
+  background: none;
+  border: none;
+  color: #00000080;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-left: 100px;
+  padding-bottom: 26px;
 }
 
 .modal__submit_valid {
@@ -108,7 +144,7 @@
 
 .modal__error {
   position: absolute;
-  bottom: -8px; /* Position it below the input */
+  bottom: -8px;
   left: 0;
   color: #ff4d4d;
   font-size: 12px;

@@ -10,10 +10,14 @@ function ModalWithForm({
   onSubmit,
   isLoading,
   isValid,
+  type = "default",
+  buttonType,
 }) {
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
-      <div className="modal__content modal__content_type_input">
+    <div className={`modal modal_type_${type} ${isOpen ? "modal_opened" : ""}`}>
+      <div
+        className={`modal__content modal__content_type_input modal__content_type_${type}`}
+      >
         <h2 className="modal__title">{title}</h2>
         <button
           onClick={onClose}
@@ -31,7 +35,9 @@ function ModalWithForm({
           {children}
           <button
             type="submit"
-            className={`modal__submit ${isValid ? "modal__submit_valid" : ""}`}
+            className={`modal__submit ${buttonType} ${
+              isValid ? "modal__submit_valid" : ""
+            }`}
             disabled={!isValid || isLoading}
           >
             {isLoading ? "Saving..." : buttonText}

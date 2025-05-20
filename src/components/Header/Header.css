@@ -39,3 +39,15 @@
   font-weight: 700;
   line-height: 1.2;
 }
+
+.header__signup-btn {
+  border: none;
+  padding-left: 20px;
+  margin: 0 auto;
+}
+
+.header__login-btn {
+  border: none;
+  padding-left: 20px;
+  margin: 0 auto;
+}
