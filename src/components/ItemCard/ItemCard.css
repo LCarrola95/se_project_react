@@ -44,3 +44,17 @@
 .card__delete-button:hover {
   opacity: 0.6;
 }
+
+.item-card__like-button {
+  border: none;
+  background: none;
+  position: absolute;
+  top: 20px;
+  right: 95px;
+  padding: 0;
+}
+
+.like-icon {
+  width: 18px;
+  height: 15px;
+}

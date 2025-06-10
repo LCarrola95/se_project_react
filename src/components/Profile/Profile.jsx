@@ -24,11 +24,6 @@ function Profile({
       </div>
       <div className="profile__content">
         <div className="profile__user-info">
-          <img
-            src={currentUser?.avatar}
-            alt={`${currentUser?.name}'s avatar`}
-            className="profile__avatar"
-          />
           <h2 className="profile__username">{currentUser?.name}</h2>
         </div>
         <button onClick={onLogout} className="profile__logout-btn">

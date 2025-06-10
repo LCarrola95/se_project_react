@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
+import * as api from "../../utils/api";
 
 import "./App.css";
 import "../../vendor/fonts.css";
@@ -169,6 +170,7 @@ function App() {
       api
         .addCardLike(id, token)
         .then((updatedCard) => {
+          console.log("Card liked successfully:", updatedCard);
           setClothingItems((cards) =>
             cards.map((item) => (item._id === id ? updatedCard : item))
           );
@@ -246,7 +248,12 @@ function App() {
         .catch((error) => {
           console.error("Invalid token:", error);
           localStorage.removeItem("jwt");
+          setIsLoggedIn(false);
+          setCurrentUser(null);
         });
+    } else {
+      setIsLoggedIn(false);
+      setCurrentUser(null);
     }
   }, []);
 
@@ -274,6 +281,7 @@ function App() {
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
                     onCardLike={handleCardLike}
+                    setClothingItems={setClothingItems}
                   />
                 }
               />
