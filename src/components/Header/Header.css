@@ -50,10 +50,12 @@
   border: none;
   padding-left: 20px;
   margin: 0 auto;
+  cursor: pointer;
 }
 
 .header__login-btn {
   border: none;
   padding-left: 20px;
   margin: 0 auto;
+  cursor: pointer;
 }

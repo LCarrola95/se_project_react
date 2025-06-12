@@ -24,3 +24,21 @@
   line-height: 1.2;
   margin: 16px;
 }
+
+.sidebar__logout-btn {
+  border: none;
+  background: none;
+  font-weight: 700;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.sidebar__edit-button {
+  border: none;
+  background: none;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  cursor: pointer;
+}

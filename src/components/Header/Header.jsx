@@ -9,7 +9,6 @@ function Header({
   handleAddClick,
   weatherData,
   handleLoginClick,
-  onLogout,
   handleRegisterClick,
 }) {
   const currentUser = useContext(CurrentUserContext);
@@ -62,9 +61,6 @@ function Header({
                   </div>
                 )}
               </Link>
-              <button onClick={onLogout} className="header__logout-btn">
-                Logout
-              </button>
             </div>
           </>
         ) : (
