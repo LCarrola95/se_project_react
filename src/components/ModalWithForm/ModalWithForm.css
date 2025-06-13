@@ -57,6 +57,11 @@
   height: 456px;
 }
 
+.modal__content_type_edit {
+  max-width: 496px;
+  height: 304px;
+}
+
 .modal__form {
   display: flex;
   flex-direction: column;

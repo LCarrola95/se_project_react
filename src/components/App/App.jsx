@@ -127,9 +127,11 @@ function App() {
     try {
       const userData = await login({ email, password });
       localStorage.setItem("jwt", userData.token);
+      const loginData = await checkToken(userData.token);
       setIsLoggedIn(true);
-      setCurrentUser(userData.user);
+      setCurrentUser(loginData);
       setActiveModal("");
+
       navigate("/profile");
     } catch (error) {
       setErrorMessage("Login failed. Please check your credentials.");

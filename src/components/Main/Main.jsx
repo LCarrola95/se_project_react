@@ -1,30 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import "./Main.css";
 import WeatherCard from "../WeatherCard/WeatherCard";
 import ItemCard from "../ItemCard/ItemCard";
 import CurrentTemperatureUnitContext from "../../contexts/currentTemperatureUnitContext";
-import { getItems } from "../../utils/api";
 
-function Main({
-  weatherData,
-  handleCardClick,
-  clothingItems,
-  onCardLike,
-  setClothingItems,
-}) {
+function Main({ weatherData, handleCardClick, clothingItems, onCardLike }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const data = await getItems();
-        setClothingItems(data.reverse());
-      } catch (error) {
-        console.error("Error fetching items:", error);
-      }
-    };
-    fetchItems();
-  }, [setClothingItems]);
 
   return (
     <main>
