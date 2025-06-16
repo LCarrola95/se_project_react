@@ -78,6 +78,9 @@
   height: 24px;
   padding-top: 8px;
 }
+.modal__input_error {
+  color: red;
+}
 
 .modal__radio-buttons {
   border: none;

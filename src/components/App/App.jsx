@@ -134,7 +134,7 @@ function App() {
 
       navigate("/profile");
     } catch (error) {
-      setErrorMessage("Login failed. Please check your credentials.");
+      setErrorMessage("Incorrect password");
       console.error(error);
     } finally {
       setIsLoading(false);
@@ -265,7 +265,6 @@ function App() {
     >
       <CurrentUserContext.Provider value={currentUser}>
         <div className="page">
-          {errorMessage && <div className="error-message">{errorMessage}</div>}
           <div className="page__content">
             <Header
               handleAddClick={handleAddClick}
@@ -327,6 +326,7 @@ function App() {
             onLogin={handleLogin}
             isLoading={isLoading}
             onSwitchToRegister={handleRegisterClick}
+            errorMessage={errorMessage}
           />
           <ItemModal
             activeModal={activeModal}

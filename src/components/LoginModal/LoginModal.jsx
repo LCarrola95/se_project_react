@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./LoginModal.css";
 
 function LoginModal({
   isOpen,
@@ -7,16 +8,20 @@ function LoginModal({
   onLogin,
   isLoading,
   onSwitchToRegister,
+  errorMessage,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
   const [isValid, setIsValid] = useState(false);
+  const [showPasswordError, setShowPasswordError] = useState(false);
+  const [showEmailError, setShowEmailError] = useState(false);
 
   useEffect(() => {
     setEmail("");
     setPassword("");
     setIsValid(false);
+    setShowPasswordError(false);
+    setShowEmailError(false);
   }, [isOpen]);
 
   useEffect(() => {
@@ -44,10 +49,25 @@ function LoginModal({
     onLogin(userData);
   };
 
+  useEffect(() => {
+    if (errorMessage) {
+      if (errorMessage.includes("password")) {
+        setShowPasswordError(true);
+        setShowEmailError(false);
+      } else if (errorMessage.includes("email")) {
+        setShowEmailError(true);
+        setShowPasswordError(false);
+      } else {
+        setShowPasswordError(false);
+        setShowEmailError(false);
+      }
+    }
+  }, [errorMessage]);
+
   return (
     <ModalWithForm
       title="Log In"
-      buttonText="Login"
+      buttonText={isLoading ? "Logging in..." : "Login"}
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
@@ -57,29 +77,52 @@ function LoginModal({
       buttonType="modal__submit_type_login-register"
     >
       <label className="modal__label">
-        Email<span className="modal__required">*</span>
+        Email<span className="modal__required"></span>
         <input
           type="email"
           name="email"
           placeholder="Email"
-          className="modal__input modal__input_type_login"
+          className={`modal__input modal__input_type_login ${
+            showEmailError ? "modal__input_error" : ""
+          }`}
           value={email}
           onChange={handleEmailChange}
           required
         />
       </label>
-      <label className="modal__label">
-        Password<span className="modal__required">*</span>
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="modal__input modal__input_type_login"
-          value={password}
-          onChange={handlePasswordChange}
-          required
-        />
-      </label>
+
+      {showEmailError && (
+        <p className="modal__error-message">Invalid email address</p>
+      )}
+
+      {showPasswordError ? (
+        <>
+          <p className="modal__error-message">Incorrect password</p>
+          <input
+            type="password"
+            name="password"
+            placeholder="**********"
+            className={`modal__input modal__input_type_login modal__input_error`}
+            value={password}
+            readOnly
+          />
+        </>
+      ) : (
+        <label className="modal__label">
+          Password<span className="modal__required"></span>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className={`modal__input modal__input_type_login ${
+              showPasswordError ? "modal__input_error" : ""
+            }`}
+            value={password}
+            onChange={handlePasswordChange}
+            required
+          />
+        </label>
+      )}
 
       <div className="modal__switch">
         <button
