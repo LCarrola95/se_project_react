@@ -15,17 +15,11 @@ function AddItemModal({ onClose, isOpen, onAddItemModalSubmit, isLoading }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const result = onAddItemModalSubmit({
+    onAddItemModalSubmit({
       name: values.name || "",
       imageUrl: values.imageUrl || "",
       weather: values.weatherType || "",
     });
-
-    if (result && typeof result.catch === "function") {
-      result.catch((err) => {
-        console.error(err);
-      });
-    }
   };
 
   return (

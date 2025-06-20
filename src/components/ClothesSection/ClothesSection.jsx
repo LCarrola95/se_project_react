@@ -27,6 +27,7 @@ function ClothesSection({
           + Add new
         </button>
       </div>
+
       <ul className="clothes-section__cards">
         {userItems.length > 0 ? (
           userItems.map((item) => (

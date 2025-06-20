@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import CurrentUserContext from "../../contexts/currentUserContext";
 import logo from "../../assets/logo.svg";
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 function Header({
   handleAddClick,
