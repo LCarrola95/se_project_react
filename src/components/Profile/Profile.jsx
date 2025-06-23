@@ -8,17 +8,19 @@ function Profile({
   onEditProfile,
   onLogout,
   onCardLike,
+  handleAddClick,
 }) {
   return (
     <div className="profile">
-      <SideBar onEditProfile={onEditProfile} onLogout={onLogout} />
-      <div className="profile__header"></div>
-      <div className="profile__content">
-        <div className="profile__user-info"></div>
+      <div className="profile__sidebar">
+        <SideBar onEditProfile={onEditProfile} onLogout={onLogout} />
+      </div>
+      <div className="profile__clothes-section">
         <ClothesSection
           onCardClick={onCardClick}
           clothingItems={clothingItems}
           onCardLike={onCardLike}
+          handleAddClick={handleAddClick}
         />
       </div>
     </div>
