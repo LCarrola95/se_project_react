@@ -115,3 +115,8 @@ export const coordinates = {
 };
 
 export const APIkey = "8c35146fac11e216d98b71a16b88e129";
+
+export const BASE_URL =
+  process.env.NODE_ENV === "production"
+    ? "https://api.gusthebus.jumpingcrab.com"
+    : "http://localhost:3001";

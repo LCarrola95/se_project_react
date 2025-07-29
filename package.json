@@ -3,14 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://lcarrola95.github.io/se_project_react/",
+  "homepage": "https://gusthebus.jumpingcrab.com",
   "scripts": {
     "dev": "vite --open",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "npm run build &&  scp -r ./dist/* lcarrola70@gusthebus.jumpingcrab.com:/home/lcarrola70/frontend"
   },
   "dependencies": {
     "celebrate": "^15.0.3",
