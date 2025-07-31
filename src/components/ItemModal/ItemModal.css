@@ -20,18 +20,8 @@
   margin: 20px 0 12px 32px;
 }
 
-/*.modal__content {
-  position: relative;
-  background-color: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  width: 90%;
-  height: 498px;
-  max-width: 498px;
-}*/
-
 .modal__content_type_image {
-  padding: 0; 
+  padding: 0;
   position: relative;
   background-color: #fff;
   border-radius: 16px;
@@ -40,22 +30,6 @@
   height: 498px;
   max-width: 498px;
 }
-}
-
-/*.modal__close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 20;
-}
-
-.modal__close-icon {
-  width: 24px;
-  height: 24px;
-}*/
 
 .modal__image-container {
   position: relative;
@@ -84,14 +58,14 @@
 .modal__delete-button {
   background: none;
   border: none;
-  color: #FF4D4D;
+  color: #ff4d4d;
   font-size: 20px;
   line-height: 1.2;
   cursor: pointer;
   padding: 0;
   position: relative;
-    left: 380px;
-    bottom: 90px
+  left: 380px;
+  bottom: 90px;
 }
 
 .modal__delete-button:hover {
